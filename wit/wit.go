@@ -15,7 +15,16 @@ var (
 	ErrInvalidVerbose = fmt.Errorf("WIT_API_VERBOSE must be set to true or false")
 )
 
-// Wit s
+// ErrInvalidVersion error
+type ErrInvalidVersion struct {
+	Version string
+}
+
+func (e *ErrInvalidVersion) Error() string {
+	return "Version %s does not exist " + e.Version
+}
+
+// Wit struct is used to configure client
 type Wit struct {
 	Token   string
 	URL     string
@@ -23,15 +32,7 @@ type Wit struct {
 	Verbose string
 }
 
-// DefaultWit d
-var DefaultWit = &Wit{
-	defaults("WIT_API_TOKEN", ""),
-	defaults("WIT_API_URL", "https://api.wit.ai"),
-	defaults("WIT_API_VERSION", "20180527"),
-	defaults("WIT_API_VERBOSE", "false"),
-}
-
-// New f
+// New function creates default instance of Wit struct
 func New() (*Wit, error) {
 	DefaultWit := &Wit{
 		defaults("WIT_API_TOKEN", ""),
@@ -50,7 +51,7 @@ func (w *Wit) Message(msg string) *Message {
 	return &Message{w, params}
 }
 
-// SanityCheck f
+// SanityCheck function checks if Wit struct attributes are valid
 func (w *Wit) SanityCheck() error {
 	fn := [](func() error){w.validateToken, w.validateVersion, w.validateVerbose}
 	for _, f := range fn {
@@ -62,7 +63,7 @@ func (w *Wit) SanityCheck() error {
 	return nil
 }
 
-// CreateRequest f
+// CreateRequest function creates http.Client and populates headers with default values
 func (w *Wit) CreateRequest(method, params string) (*http.Client, *http.Request, error) {
 	err := w.SanityCheck()
 	if err != nil {
@@ -78,7 +79,7 @@ func (w *Wit) CreateRequest(method, params string) (*http.Client, *http.Request,
 	return client, req, nil
 }
 
-// DoRequest f
+// DoRequest function makes actual http call and return response body and return code
 func (w *Wit) DoRequest(req *http.Request, client *http.Client) ([]byte, int, error) {
 	resp, err := client.Do(req)
 	if err != nil {
@@ -91,7 +92,7 @@ func (w *Wit) DoRequest(req *http.Request, client *http.Client) ([]byte, int, er
 	return body, resp.StatusCode, err
 }
 
-// MakeRequest f
+// MakeRequest function is wrapper around DoRequest and CreateRequest functions
 func (w *Wit) MakeRequest(method, params string) ([]byte, int, error) {
 	client, req, err := w.CreateRequest(method, params)
 	if err != nil {
@@ -137,17 +138,4 @@ func defaults(parameter, fallback string) string {
 	return value
 }
 
-// ErrInvalidVersion error
-type ErrInvalidVersion struct {
-	Version string
-}
-
-func (e *ErrInvalidVersion) Error() string {
-	return "Version %s does not exist " + e.Version
-}
-
 // TODO Also create function to populate optional arguments.
-// AddParam
-// _test function
-// add proper logging(levels)
-// add proper error handling

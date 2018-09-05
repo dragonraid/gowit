@@ -2,6 +2,8 @@
 
 `gowit` is the Go SDK for [Wit.ai](https://wit.ai/)
 
+**This is WIP**
+
 ## Install
 Using `go get`:
 
