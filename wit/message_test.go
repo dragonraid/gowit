@@ -10,21 +10,7 @@ import (
 	"github.com/dragonraid/gowit/wit"
 )
 
-var response = `{
-              "_text": "Message test response", 
-              "entities": {
-                "datetime": [
-                  {
-                    "confidence": 0.9,
-                    "value": "test"
-                  }
-                ],
-                "intent": "date"
-              },
-              "msg_id": "ereawrgggrw12"
-            }`
-
-// MessageTestStruct s
+// MessageTestStruct struct
 type MessageTestStruct struct {
 	Input       *wit.Message
 	Response    string
@@ -65,13 +51,13 @@ var message = []MessageTestStruct{
 	},
 }
 
-// MessageHandler f
+// MessageHandler function mocks wit.ai/messages endpoint
 func (m *MessageTestStruct) MessageHandler(w http.ResponseWriter, r *http.Request) {
 	io.WriteString(w, m.Response)
 	//w.Write(payload)
 }
 
-// TestMessageHandler f
+// TestMessageHandler function uses MessageHandler to perform specific usecase tests
 func TestMessageHandler(t *testing.T) {
 	for _, msg := range message {
 		t.Run(msg.Description, func(t *testing.T) {

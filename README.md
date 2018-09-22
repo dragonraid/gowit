@@ -1,5 +1,7 @@
 # gowit
 
+[![Build Status](https://travis-ci.org/dragonraid/gowit.svg?branch=master)](https://travis-ci.org/dragonraid/gowit)
+
 `gowit` is the Go SDK for [Wit.ai](https://wit.ai/)
 
 **This is WIP**

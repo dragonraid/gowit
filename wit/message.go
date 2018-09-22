@@ -4,21 +4,22 @@ import (
 	"encoding/json"
 )
 
-// Message s
+// Message struct
 type Message struct {
 	WitConf *Wit
 	Params  string
 	// params[]string
 }
 
-// MessageResponse s
+// MessageResponse struct to map response body of wit.ai/message endpoint
 type MessageResponse struct {
 	Text     string                 `json:"_text"`
 	Entities map[string]interface{} `json:"entities"`
 	MsgID    string                 `json:"msg_id"`
 }
 
-// Do f
+// Do function makes actual call to wit.ai/message endpoint and
+// retrieves its response
 func (m *Message) Do() (MessageResponse, int, error) {
 	var responseBody MessageResponse
 	body, statusCode, err := m.WitConf.MakeRequest("GET", m.Params)
