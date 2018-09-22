@@ -1,0 +1,14 @@
+language: go
+sudo: false
+dist: trusty
+osx_image: xcode10
+go:
+  - 1.10.x
+
+os:
+  - linux
+  - osx
+
+install:
+
+script:
