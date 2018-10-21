@@ -2,6 +2,7 @@ package wit
 
 import (
 	"encoding/json"
+	"net/url"
 )
 
 // Message struct
@@ -31,4 +32,10 @@ func (m *Message) Do() (MessageResponse, int, error) {
 		return responseBody, 0, err
 	}
 	return responseBody, statusCode, nil
+}
+
+// SetParameters function sets additional parameters to url message
+func (m *Message) SetParameters(parameters string) {
+	encodedParameters := &url.URL{Path: parameters}
+	m.Params += "&" + encodedParameters.String()
 }

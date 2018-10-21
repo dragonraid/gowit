@@ -53,7 +53,7 @@ var message = []MessageTestStruct{
 
 // MessageHandler function mocks wit.ai/messages endpoint
 func (m *MessageTestStruct) MessageHandler(w http.ResponseWriter, r *http.Request) {
-	io.WriteString(w, m.Response)
+	_, _ = io.WriteString(w, m.Response)
 	//w.Write(payload)
 }
 
@@ -66,7 +66,7 @@ func TestMessageHandler(t *testing.T) {
 				t.Errorf("An error occured: \"%s\"", err)
 			}
 			var responseBody wit.MessageResponse
-			err = json.Unmarshal([]byte(responseRecorder.Body.String()), &responseBody)
+			err = json.Unmarshal(responseRecorder.Body.Bytes(), &responseBody)
 			if err == nil {
 			} else if err.Error() != msg.Expected[1].Error() {
 				t.Errorf("An error occured: \"%s\"", err)
