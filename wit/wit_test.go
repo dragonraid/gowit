@@ -87,7 +87,6 @@ type RequestHandler func(w http.ResponseWriter, r *http.Request)
 
 // TestWit f
 func TestWit(t *testing.T) {
-
 	for _, conf := range config {
 		t.Run(conf.Description, func(t *testing.T) {
 			if err := conf.Input.SanityCheck(); reflect.TypeOf(err) == reflect.TypeOf(conf.Expected) {

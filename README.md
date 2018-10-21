@@ -8,13 +8,14 @@
 
 ## Install
 Using `go get`:
-
-	go get github.com/dragonraid/gowit
-	
+```
+go get github.com/dragonraid/gowit
+```	
 From source:
-
-	git clone https://github.com/dragonraid/gowit $GOPATH/src/github.com/dragonraid/
-	
+```
+git clone https://github.com/dragonraid/gowit $GOPATH/src/github.com/dragonraid/
+go install $GOPATH/src/github.com/dragonraid/gowit
+```	
 ## Usage:
 
 For minimal working example you need to specify `WIT_API_TOKEN` environment variable. Then you can do:
@@ -40,7 +41,7 @@ The default API version is `20180527`. You can target a specific version by sett
 ## Optional settings
 You have two options how to setup your client behaviour
 * Environment variables
-	* `WIT_API_URL` (defaults to `20180527`)
+	* `WIT_API_URL`     (defaults to `https://api.wit.ai`)
 	* `WIT_API_VERSION` (defaults to `20180527`)
 	* `WIT_API_VERBOSE` (defaults to `false`) 
 	
