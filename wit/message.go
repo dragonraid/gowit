@@ -9,7 +9,6 @@ import (
 type Message struct {
 	WitConf *Wit
 	Params  string
-	// params[]string
 }
 
 // MessageResponse struct to map response body of wit.ai/message endpoint
