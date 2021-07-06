@@ -1,5 +1,7 @@
 # gowit
 
+> NOTE: Deprecated in favour of this [project](https://github.com/wit-ai/wit-go)
+
 [![Build Status](https://travis-ci.org/dragonraid/gowit.svg?branch=master)](https://travis-ci.org/dragonraid/gowit)
 
 `gowit` is the Go SDK for [Wit.ai](https://wit.ai/)
